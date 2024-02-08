@@ -38,6 +38,9 @@ dependencies:
   react-query:
     specifier: ^3.39.3
     version: 3.39.3(react-dom@18.2.0)(react@18.2.0)
+  reflect-metadata:
+    specifier: ^0.2.1
+    version: 0.2.1
 
 devDependencies:
   '@types/jest':

@@ -21,9 +21,11 @@ if [ -f "$CONFIGFILE" ] ;then
 fi
 
 mkdir tests
-echo "
-module.exports = {
+echo "module.exports = {
     preset: 'ts-jest',
-    testEnvironment: 'node'
+    testEnvironment: 'node',
+    moduleNameMapper:{
+        "^@/(.*)$": "<rootDir>/src/$1"
+    },
 }
 " > "$CONFIGFILE"
