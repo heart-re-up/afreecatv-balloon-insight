@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Box } from "@mui/material";
+import MuiThemeProvider from "@/components/MuiThemeProvider";
+import MyQueryClientProvider from "@/contexts/MyQueryClientProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <MuiThemeProvider>
+        <body className={inter.className}>
+          <main className="flex min-h-screen flex-col items-center justify-between p-24">
+            <MyQueryClientProvider>
+              <Box sx={{ width: "1000px", maxWidth: "1000px" }}>{children}</Box>
+            </MyQueryClientProvider>
+          </main>
+        </body>
+      </MuiThemeProvider>
     </html>
   );
 }
