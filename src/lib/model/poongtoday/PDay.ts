@@ -1,6 +1,7 @@
 import { Expose } from "class-transformer";
+import "reflect-metadata";
 
-export class PDay {
+export default class PDay {
   @Expose({ name: "d" })
   public readonly day: string; // d
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { QueryClient, QueryClientProvider, useQueryClient } from "react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 import LayoutDefaultParams from "@/lib/LayoutDefaultParams";
 
 export default function MyQueryClientProvider({

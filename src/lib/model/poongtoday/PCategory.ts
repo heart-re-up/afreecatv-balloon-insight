@@ -1,6 +1,7 @@
 import { Expose } from "class-transformer";
+import "reflect-metadata";
 
-export class PCategory {
+export default class PCategory {
   // category number 00130000 => 13
   @Expose({ name: "m" })
   public readonly method: number;

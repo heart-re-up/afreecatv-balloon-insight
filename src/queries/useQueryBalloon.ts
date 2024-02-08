@@ -1,17 +1,20 @@
 import { useQuery } from "react-query";
-import { api, ISuggestBj } from "@afreecatv/api";
 import { isEmpty } from "lodash";
+import poongtoday from "@/lib/api/poongtoday";
+import PMonth from "@/lib/model/poongtoday/PMonth";
 
 const KEY = "BALLOON";
+const {
+  bj: { detailAll },
+} = poongtoday();
 const queryFn = async (id: string) => {
   try {
-    const response = await api().etc.searchHistory(id);
-    return response.suggest_bj;
+    return await detailAll(id);
   } catch (e) {
-    return [] as ISuggestBj[];
+    return [] as PMonth[];
   }
 };
-const seQueryBalloon = (id: string) => {
+const useQueryBalloon = (id: string) => {
   return useQuery([KEY, id], {
     queryFn: () => queryFn(id),
     enabled: !isEmpty(id),
@@ -19,5 +22,5 @@ const seQueryBalloon = (id: string) => {
   });
 };
 
-seQueryBalloon.KEY = KEY;
-export default seQueryBalloon;
+useQueryBalloon.KEY = KEY;
+export default useQueryBalloon;

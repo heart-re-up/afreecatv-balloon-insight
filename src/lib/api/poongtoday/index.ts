@@ -1,5 +1,7 @@
+import "reflect-metadata";
 import detail from "@/lib/api/poongtoday/bj/detail";
+import detailAll from "@/lib/api/poongtoday/bj/detailAll";
 
-export function poongtoday() {
-  return { bj: { detail } };
+export default function poongtoday() {
+  return { bj: { detail, detailAll } };
 }

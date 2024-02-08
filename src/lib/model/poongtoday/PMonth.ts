@@ -1,9 +1,18 @@
-import { Expose, Type } from "class-transformer";
-import { PViewer } from "@/lib/model/poongtoday/PViewer";
-import { PCategory } from "@/lib/model/poongtoday/PCategory";
-import { PDay } from "@/lib/model/poongtoday/PDay";
+import "reflect-metadata";
+import { Exclude, Expose, Type } from "class-transformer";
+import { DateTime } from "luxon";
+import { isEmpty } from "lodash";
+import PViewer from "@/lib/model/poongtoday/PViewer";
+import PCategory from "@/lib/model/poongtoday/PCategory";
+import PDay from "@/lib/model/poongtoday/PDay";
 
-export class PMonth {
+export default class PMonth {
+  @Exclude()
+  private date: DateTime | null = null;
+
+  @Exclude()
+  private _error: string | null = null;
+
   /** 해당월 별풍선 개수 */
   @Expose({ name: "b" })
   public readonly balloon: number;
@@ -38,5 +47,22 @@ export class PMonth {
     this.days = days;
     this.categories = categories;
     this.viewers = viewers;
+  }
+
+  setDateTime(date: DateTime) {
+    this.date = date;
+  }
+
+  getDateTime() {
+    if (this.date == null) throw new Error("date is unset.");
+    return this.date;
+  }
+
+  get error(): boolean {
+    return !isEmpty(this._error);
+  }
+
+  set error(value: string | null) {
+    this._error = value;
   }
 }

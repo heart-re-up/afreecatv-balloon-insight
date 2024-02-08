@@ -3,9 +3,12 @@ import { api, ISuggestBj } from "@afreecatv/api";
 import { isEmpty } from "lodash";
 
 const KEY = "SEARCH_STREAMERS";
+const {
+  etc: { searchHistory },
+} = api();
 const queryFn = async (search: string) => {
   try {
-    const response = await api().etc.searchHistory(search);
+    const response = await searchHistory(search);
     return response.suggest_bj;
   } catch (e) {
     return [] as ISuggestBj[];
