@@ -1,6 +1,7 @@
 import { Exclude, Expose } from "class-transformer";
 import "reflect-metadata";
 import { DateTime } from "luxon";
+import { NORMALIZE_USER_ID } from "@/lib/regex";
 
 export default class PViewer {
   @Exclude()
@@ -44,5 +45,12 @@ export default class PViewer {
 
   set userNick(value: string) {
     this._userNick = value;
+  }
+
+  /**
+   * 사용자 아이디에 괄호표시가 있으면 제거한다
+   */
+  normalizedUserId() {
+    return this.userId.match(NORMALIZE_USER_ID)?.[0];
   }
 }

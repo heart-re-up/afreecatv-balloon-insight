@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@afreecatv/api':
-    specifier: ^0.0.2
-    version: 0.0.2
+    specifier: ^0.0.6
+    version: 0.0.6
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.3(@types/react@18.2.55)(react@18.2.0)
@@ -120,8 +120,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /@afreecatv/api@0.0.2:
-    resolution: {integrity: sha512-TCICwYo8hUSHNWOydUaciQNjobsOYuGIcIADi7GzCJzEu2WxC8hs5BaeXumxCgj4iA9hFdJKE1suBZ0qZb+kRg==}
+  /@afreecatv/api@0.0.6:
+    resolution: {integrity: sha512-mMO04RSIot5OwRfPJReVhRH7ohwEx+hBiezSeCikE+Lbk2rvmh3sWw1mAxPSwm9SUWV3som9JoHH7QaQn7e6NA==}
     dependencies:
       class-transformer: 0.5.1
       luxon: 3.4.4

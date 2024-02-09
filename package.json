@@ -5,11 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate": "next build && next export",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@afreecatv/api": "^0.0.2",
+    "@afreecatv/api": "^0.0.6",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.8",

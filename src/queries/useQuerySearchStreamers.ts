@@ -1,17 +1,17 @@
 import { useQuery } from "react-query";
-import { api, ISuggestBj } from "@afreecatv/api";
 import { isEmpty } from "lodash";
+import afreecatvApi from "@afreecatv/api/dist";
 
 const KEY = "SEARCH_STREAMERS";
 const {
   etc: { searchHistory },
-} = api();
+} = afreecatvApi();
 const queryFn = async (search: string) => {
   try {
     const response = await searchHistory(search);
-    return response.suggest_bj;
+    return response.suggestBj;
   } catch (e) {
-    return [] as ISuggestBj[];
+    return [];
   }
 };
 const useSearchStreamers = (search: string) => {

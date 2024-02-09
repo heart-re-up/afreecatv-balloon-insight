@@ -1,7 +1,6 @@
 import { useQuery } from "react-query";
 import { isEmpty } from "lodash";
 import poongtoday from "@/lib/api/poongtoday";
-import PMonth from "@/lib/model/poongtoday/PMonth";
 
 const KEY = "BALLOON";
 const {
@@ -11,7 +10,7 @@ const queryFn = async (id: string) => {
   try {
     return await detailAll(id);
   } catch (e) {
-    return [] as PMonth[];
+    return [];
   }
 };
 const useQueryBalloon = (id: string) => {
