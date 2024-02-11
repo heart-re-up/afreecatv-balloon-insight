@@ -12,7 +12,9 @@ const useQueryStation = (userId: string) => {
     queryFn: () => getBjStation(userId),
     enabled: !isEmpty(userId),
     staleTime: 300_000, // 5 min
+    retry: 1,
     refetchOnWindowFocus: false,
+    refetchOnMount: false,
     onError: (err) => {
       console.log("error on getBjStation");
       console.warn(err);

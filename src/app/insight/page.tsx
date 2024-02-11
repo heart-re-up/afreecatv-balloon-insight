@@ -3,7 +3,7 @@
 import { Container } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import StreamerCard from "@/components/afreeca/StreamerCard";
-import Donors from "@/components/Donors";
+import DonorCardList from "@/components/donor/DonorCardList";
 import MyAppBar from "@/components/MyAppBar";
 
 export default function InsightPage() {
@@ -14,7 +14,7 @@ export default function InsightPage() {
       <MyAppBar />
       <Container className="py-4 space-y-4">
         <StreamerCard userId={id} />
-        <Donors streamerId={id} />
+        <DonorCardList streamerId={id} />
       </Container>
     </main>
   );

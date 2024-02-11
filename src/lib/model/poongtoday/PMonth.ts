@@ -2,7 +2,7 @@ import "reflect-metadata";
 import { Exclude, Expose, Type } from "class-transformer";
 import { DateTime } from "luxon";
 import { isEmpty } from "lodash";
-import PViewer from "@/lib/model/poongtoday/PViewer";
+import PDonor from "@/lib/model/poongtoday/PDonor";
 import PCategory from "@/lib/model/poongtoday/PCategory";
 import PDay from "@/lib/model/poongtoday/PDay";
 
@@ -30,23 +30,23 @@ export default class PMonth {
   @Expose({ name: "c" })
   public readonly categories: Array<PCategory>;
 
-  /** 시청자 */
-  @Type(() => PViewer)
+  /** 후원자 */
+  @Type(() => PDonor)
   @Expose({ name: "f" })
-  public readonly viewers: Array<PViewer>;
+  public readonly donors: Array<PDonor>;
 
   constructor(
     balloon: number,
     viewerCount: number,
     days: Array<PDay>,
     categories: Array<PCategory>,
-    viewers: Array<PViewer>,
+    donors: Array<PDonor>,
   ) {
     this.balloon = balloon;
     this.viewerCount = viewerCount;
     this.days = days;
     this.categories = categories;
-    this.viewers = viewers;
+    this.donors = donors;
   }
 
   setDateTime(date: DateTime) {

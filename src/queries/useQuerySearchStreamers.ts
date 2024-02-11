@@ -18,7 +18,7 @@ const useSearchStreamers = (search: string) => {
   return useQuery([KEY, search], {
     queryFn: () => queryFn(search),
     enabled: !isEmpty(search),
-    staleTime: 30_000,
+    staleTime: 300_000,
   });
 };
 

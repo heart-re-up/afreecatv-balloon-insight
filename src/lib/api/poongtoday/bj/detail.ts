@@ -10,6 +10,6 @@ export default async function detail(id: string, year: number, month: number) {
   const date = DateTime.local(year, month);
   result.setDateTime(date);
   result.error = json.error;
-  if (!result.error) result.viewers.forEach((v) => v.setDate(date));
+  if (!result.error) result.donors.forEach((v) => v.setDate(date));
   return result;
 }

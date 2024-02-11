@@ -1,9 +1,9 @@
 import { maxBy, reduce } from "lodash";
 import afreecatvApi, { BjStation } from "@afreecatv/api/dist";
-import PViewer from "@/lib/model/poongtoday/PViewer";
+import PDonor from "@/lib/model/poongtoday/PDonor";
 
-export default class PViewerMerged {
-  private readonly viewers: Array<PViewer>;
+export default class PDonorMerged {
+  private readonly viewers: Array<PDonor>;
 
   public readonly userId: string;
 
@@ -13,7 +13,7 @@ export default class PViewerMerged {
 
   public station?: BjStation;
 
-  constructor(userId: string, viewers: Array<PViewer>) {
+  constructor(userId: string, viewers: Array<PDonor>) {
     this.userId = userId;
     const maxPViewer = maxBy(viewers, (v) => v.date?.toMillis());
     this.recentUserNick = maxPViewer?.userSubNick ?? "unknown";

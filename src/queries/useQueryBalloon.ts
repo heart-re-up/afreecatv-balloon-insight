@@ -17,7 +17,7 @@ const useQueryBalloon = (id: string) => {
   return useQuery([KEY, id], {
     queryFn: () => queryFn(id),
     enabled: !isEmpty(id),
-    staleTime: 30_000,
+    staleTime: 300_000,
   });
 };
 

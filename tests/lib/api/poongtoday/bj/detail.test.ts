@@ -1,7 +1,7 @@
 import { flatMap } from "lodash";
 import detailAll from "@/lib/api/poongtoday/bj/detailAll";
 import poongtoday from "@/lib/api/poongtoday";
-import collectViewers from "@/lib/utils/collectViewers";
+import mergeDonors from "@/lib/utils/mergeDonors";
 
 const {
   bj: { detail },
@@ -15,7 +15,7 @@ describe("poongtoday", () => {
   test("bj.detailAll", async () => {
     const response = await detailAll("dm0229");
     console.log(response);
-    const collectedViewers = collectViewers(...response);
+    const collectedViewers = mergeDonors(...response);
     console.log(collectedViewers);
   });
 });

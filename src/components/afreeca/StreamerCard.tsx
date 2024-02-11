@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Avatar,
   Card,
   CardContent,
   CardHeader,
@@ -11,67 +10,42 @@ import {
 } from "@mui/material";
 import { filter, flatMap, isEmpty, reduce } from "lodash";
 import { useMemo } from "react";
-import useQueryStation from "@/queries/useQueryStation";
 import useQueryBalloon from "@/queries/useQueryBalloon";
-import GroupsOfStreamer from "@/components/afreeca/GroupsOfStreamer";
+import StreamerCardHeader from "@/components/afreeca/StreamerCardHeader";
+import formatNumber from "@/lib/utils/format";
 
 export interface StreamerCardProps {
   userId: string;
 }
-const formatter = new Intl.NumberFormat("ko-KR");
+
 export default function StreamerCard(props: StreamerCardProps) {
   const { userId } = props;
-  const { data: station, isLoading: isLoadingStation } =
-    useQueryStation(userId);
-  const { data: months } = useQueryBalloon(userId);
-  const viewers = useMemo(
-    () =>
-      filter(
-        flatMap(months, (v) => v.viewers),
-        (v) => !isEmpty(v),
-      ),
-    [months],
-  );
+  const { data, isLoading } = useQueryBalloon(userId);
+
+  // 모든 기록에서 후원자 추출
+  const donors = useMemo(() => {
+    const flatten = flatMap(data, (v) => v.donors);
+    return filter(flatten, (v) => !isEmpty(v));
+  }, [data]);
   const balloonTotal = useMemo(
-    () => reduce(viewers, (prev, curr) => prev + (curr?.balloon ?? 0), 0),
-    [viewers],
+    () => reduce(donors, (prev, curr) => prev + (curr?.balloon ?? 0), 0),
+    [donors],
   );
   const balloonTotalString = useMemo(
-    () => formatter.format(balloonTotal),
+    () => formatNumber(balloonTotal),
     [balloonTotal],
   );
   return (
     <Card>
-      <CardHeader
-        title={
-          <div className="flex flex-col gap-y-1">
-            <div className="flex flex-row gap-x-4 justify-start items-center">
-              {isLoadingStation ? (
-                <>
-                  <Skeleton variant="circular" width={40} height={40} />
-                  <div className="flex flex-col gap-1">
-                    <Skeleton variant="text" width={80} height={30} />
-                    <Skeleton variant="text" width={80} height={30} />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Avatar src={station?.profileImage} />
-                  {station?.station?.userNick}
-                </>
-              )}
-            </div>
-            <GroupsOfStreamer groups={station?.station.groups} />
-          </div>
-        }
-      />
+      <CardHeader title={<StreamerCardHeader userId={userId} />} />
       <Divider />
       <CardContent>
         <div className="flex flex-col gap-1">
-          {balloonTotal === 0 ? (
+          {isLoading ? (
             <div className="flex flex-col items-end">
-              <Skeleton variant="text" width={80} height={20} />
-              <Skeleton variant="text" width={120} height={14} />
+              <Skeleton variant="text" width={80} height={30} />
+              <Skeleton variant="text" width={160} height={16} />
+              <Skeleton variant="text" width={160} height={16} />
             </div>
           ) : (
             <>
@@ -80,10 +54,25 @@ export default function StreamerCard(props: StreamerCardProps) {
               </Typography>
               <Typography
                 align="right"
-                fontSize="xx-small"
+                fontSize="x-small"
                 color="accentPrimary"
               >
                 풍투데이에서 2021.01 부터 수집된 데이터 입니다.
+              </Typography>
+              <Typography
+                align="right"
+                fontSize="x-small"
+                color="accentPrimary"
+              >
+                방송국, 성인방송, 대결풍 등은 집계에서 제외됩니다.
+              </Typography>
+
+              <Typography
+                align="right"
+                fontSize="x-small"
+                color="accentPrimary"
+              >
+                풍투데이 데이터 이상시 제대로 표시되지 않습니다.
               </Typography>
             </>
           )}

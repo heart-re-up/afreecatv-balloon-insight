@@ -1,5 +1,7 @@
 import { Avatar, Button, Card, Typography } from "@mui/material";
 import { SuggestBj } from "@afreecatv/api";
+import useQueryStation from "@/queries/useQueryStation";
+import formatNumber from "@/lib/utils/format";
 
 export interface StreamerListItemProps {
   streamer: SuggestBj;
@@ -8,6 +10,7 @@ export interface StreamerListItemProps {
 
 export default function StreamerSearchResult(props: StreamerListItemProps) {
   const { streamer, onClick } = props;
+  const { data: station } = useQueryStation(streamer.userId);
   return (
     <Card>
       <Button
@@ -15,11 +18,19 @@ export default function StreamerSearchResult(props: StreamerListItemProps) {
         onClick={() => onClick?.(streamer)}
       >
         <Avatar src={streamer.stationLogo ?? ""} />
-        <div className="flex flex-col align-top justify-center">
+        <div className="flex-1 flex flex-col align-top justify-center">
           <Typography textAlign="start">{streamer.userNick}</Typography>
-          <Typography color="gray" fontSize="smaller">
+          <Typography textAlign="start" color="gray" fontSize="smaller">
             {streamer.userId}
           </Typography>
+        </div>
+        <div>
+          <div className="flex justify-between">
+            {/* 애청자 수 */}
+            <Typography fontSize="xx-small">
+              즐찾 {formatNumber(station?.station.upd.fanCnt ?? 0)}
+            </Typography>
+          </div>
         </div>
       </Button>
     </Card>

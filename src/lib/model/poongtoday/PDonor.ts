@@ -3,7 +3,7 @@ import "reflect-metadata";
 import { DateTime } from "luxon";
 import { NORMALIZE_USER_ID } from "@/lib/regex";
 
-export default class PViewer {
+export default class PDonor {
   @Exclude()
   private _date: DateTime | null = null;
 

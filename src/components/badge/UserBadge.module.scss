@@ -1,0 +1,21 @@
+.badge {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 0.1rem;
+
+  &.manager {
+    background-color: #10808a;
+  }
+
+  &.vip {
+    background-color: #e0278c;
+  }
+
+  &.supporter {
+    background-color: #8146b6;
+  }
+
+  &.fan {
+    background-color: #51a61b;
+  }
+}
