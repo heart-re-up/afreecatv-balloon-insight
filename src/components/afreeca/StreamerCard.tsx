@@ -64,7 +64,7 @@ export default function StreamerCard(props: StreamerCardProps) {
                 fontSize="x-small"
                 color="accentPrimary"
               >
-                방송국, 성인방송, 대결풍 등은 집계에서 제외됩니다.
+                방송국, 성인방송, 대결풍 및 누락 데이터는 집계에서 제외됩니다.
               </Typography>
 
               <Typography

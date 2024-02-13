@@ -1,13 +1,5 @@
-import {
-  Bar,
-  BarDatum,
-  BarTooltipProps,
-  DataProps,
-  ResponsiveBar,
-} from "@nivo/bar";
+import { Bar, BarDatum, BarTooltipProps, DataProps } from "@nivo/bar";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { linearGradientDef } from "@nivo/core";
-import DonorCard from "@/components/donor/DonorCard";
 
 export interface DonorChartByMonthsProps<T extends BarDatum>
   extends DataProps<T> {

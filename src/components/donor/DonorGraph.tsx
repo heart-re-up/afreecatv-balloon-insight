@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { find, map, sortBy } from "lodash";
 import { Skeleton } from "@mui/material";
 import useQueryBalloon from "@/queries/useQueryBalloon";
@@ -16,19 +16,22 @@ export default function DonorGraph(props: DonorGraphProps) {
   const { streamerId, donorId } = props;
   const { data = [], isLoading } = useQueryBalloon(streamerId);
   // 월데이터에서 특정 데이터 추출
-  const extractBySpecificDonor = (m: PMonth) => {
-    const date = m.getDateTime().toFormat("yyyy-MM");
-    const donor = find(m.donors, (d) => d.userId === donorId);
-    const balloon = donor?.balloon ?? 0;
-    return {
-      date,
-      balloon,
-    };
-  };
+  const extractBySpecificDonor = useCallback(
+    (m: PMonth) => {
+      const date = m.getDateTime().toFormat("yyyy-MM");
+      const donor = find(m.donors, (d) => d.userId === donorId);
+      const balloon = donor?.balloon ?? 0;
+      return {
+        date,
+        balloon,
+      };
+    },
+    [donorId],
+  );
   // extract by donor
   const barData = useMemo(
     () => map(data, extractBySpecificDonor),
-    [extractBySpecificDonor, donorId, data],
+    [data, extractBySpecificDonor],
   );
   // sort by date
   const sortedBarData = useMemo(

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Box } from "@mui/material";
 import React, { Suspense } from "react";
 import MuiThemeProvider from "@/components/MuiThemeProvider";
 import MyQueryClientProvider from "@/contexts/MyQueryClientProvider";
