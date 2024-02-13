@@ -10,12 +10,12 @@ export default function InsightPage() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id") ?? "";
   return (
-    <main>
+    <>
       <MyAppBar />
       <Container className="py-4 space-y-4">
         <StreamerCard userId={id} />
         <DonorCardList streamerId={id} />
       </Container>
-    </main>
+    </>
   );
 }
